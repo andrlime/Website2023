@@ -6,7 +6,7 @@ import styles from '../styles/Q.module.css';
 import axios from 'axios';
 
 const Skills: FunctionComponent = () => {
-  let languages = ["TypeScript", "JavaScript", "React", "Next.js", "Node.js", "Express.js", "Python",
+  let languages = ["TypeScript", "JavaScript", "React", "Next.js", "Node.js", "Express", "Python",
     "Racket", "Sass", "Julia", "Adobe Photoshop", "Adobe InDesign", "Adobe Illustrator", "Canva", "DigitalOcean", "Git", "MongoDB"];
   return (
     <div style={{width: "75%"}}>
