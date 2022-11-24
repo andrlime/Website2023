@@ -16,12 +16,12 @@ export default function coding(
     
     Airtable.configure({
         endpointUrl: 'https://api.airtable.com',
-        apiKey: process.env.AIRTABLE_KEY
+        apiKey: process.env.API_KEY
     });
-    const base = Airtable.base(process.env.AIRTABLE_BASE || "");
+    const base = Airtable.base(process.env.BASE_KEY || "");
     const arr: Array<Project> = [];
 
-    base('coding').select({
+    base('paragraphs').select({
         maxRecords: 100,
         view: "Grid view"
     }).eachPage(function page(records: any, fetchNextPage: any) {

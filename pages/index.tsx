@@ -1,28 +1,56 @@
 /* eslint-disable @next/next/no-img-element */
 import type { NextPage } from 'next';
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import Head from 'next/head';
 import styles from '../styles/Q.module.css';
+import axios from 'axios';
 
-const Card: FunctionComponent<{ title: string, link: string, description: string, imageUrl?: string }> = ({title, link, description, imageUrl}) => {
+const Card: FunctionComponent<{ title: string, link: string, description: string, languageId: string, imageUrl?: string }> = ({title, link, description, languageId, imageUrl}) => {
   return (
     <div className={styles.card}>
-      <div><span className={styles.title}>{title}</span>&nbsp;<span className={styles.link}><a href={link}>{link}</a></span></div>
+      <div><span className={styles.title}>{title}</span>&nbsp;{link!="none" ? <span className={styles.link} style={{padding: "0.5rem", display: "inline-block", borderRadius: "5rem", lineHeight: "0"}}><a href={link}><img src="/link.png" width="15"/></a></span> : <></>} </div>
+      <div className={styles.lang}><img src={`https://img.shields.io/static/v1?label=&message=${languageId.charAt(0).toUpperCase() + languageId.slice(1)}&style=flat&logo=${languageId}&labelColor=cbcbcb`}/></div>
+      <div className={styles.imageFrame} style={{backgroundImage: `url(${imageUrl})`, backgroundPosition: "left", backgroundSize: "contain", backgroundRepeat: "no-repeat"}}></div>
       <div className={styles.description}>{description}</div>
     </div>
   );
 }
 
-const Paragraph: FunctionComponent<{ title: string, description: string }> = ({title, description}) => {
+const Paragraph: FunctionComponent<{ title: string, id: string, description: string }> = ({title, id, description}) => {
   return (
     <div className={styles.paragraph}>
-      <div className={styles.title}>{title}</div>
+      <div className={styles.title} id={id}>{title}</div>
       <div className={styles.description}>{description}</div>
     </div>
   );
 }
 
 const Home: NextPage = () => {
+  const [loadedPara, setLoadedPara] = useState(false);
+  const [loadedProj, setLoadedProj] = useState(false);
+  const [paragraphs, setParagraphs] = useState<Array<{ title: string, description: string }>>([]);
+  const [projects, setProjects] = useState<Array<{ title: string, link: string, description: string, imageUrl?: string }>>([])
+
+  useEffect(() => {
+    axios
+    .get("api/paragraphs")
+    .then((res) => {
+        if(res.data !== null) {
+        setLoadedPara(true);
+        setParagraphs(res.data);
+        }
+    });
+
+    axios
+    .get("api/projects")
+    .then((res) => {
+        if(res.data !== null) {
+        setLoadedProj(true);
+        setProjects(res.data);
+        }
+    });
+  }, []);
+
   return (
     <div className={styles.everything}>
       <Head>
@@ -30,6 +58,7 @@ const Home: NextPage = () => {
         <link rel="icon" type="image/x-icon" href="/icon.png"/>
       </Head>
       <div className={styles.container}>
+          <div className={styles.contentLeft}></div>
           <div className={styles.contentRight}>
             <div className={styles.name}>Andrew Li</div>
             <div className={styles.emoji}>👋</div>
@@ -38,17 +67,17 @@ const Home: NextPage = () => {
       
       <div className={styles.content}>
         <div className={styles.contentLeft}>
-          <div className={styles.item}>About Me</div>
-          <div className={styles.item}>Skills</div>
-          <div className={styles.item}>Resumé</div>
-          <div className={styles.item}>Personal Projects</div>
+          {loadedPara ? paragraphs.map((i: any) => (
+            <div className={styles.item}><a href={`#${i.htmlid}`}>{i.title}</a></div>
+          )) : "Loading..."}
         </div>
         <div className={styles.contentRight}>
-          <Paragraph title={"About Me"} description={"AAA"}/>
-          <Paragraph title={"Skills"} description={"AAA"}/>
-          <Paragraph title={"Resumés"} description={"AAA"}/>
-          <div className={styles.bigtitle}>Personal Projects</div>
-          <Card title={"AAA"} link={"AAA"} description={"AAA"} imageUrl={"AAA"}/>
+          {loadedPara ? paragraphs.map((i: any) => (
+            <Paragraph key={i} id={i.htmlid} title={i.title} description={i.content}/>
+          )) : "Loading..."}
+          {loadedProj ? projects.map((i: any) => (
+            <Card key={i} title={i.title} link={i.link} description={i.content} languageId={i.mainLanguage} imageUrl={i.imageUrl}/>
+          )) : "Loading..."}
         </div>
       </div>
     </div>

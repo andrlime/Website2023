@@ -1,4 +1,4 @@
-$black: #000000;
+$black: #1b1717;
 $white: #FFFFFF;
 $content-width: calc(max(70vw,400px));
 
@@ -37,6 +37,7 @@ $content-width: calc(max(70vw,400px));
         padding: 1rem;
         padding-top: 0.5rem;
         padding-bottom: 0.5rem;
+        width: calc(max(60%,300px));
 
         .title {
             font-size: 1.3rem;
@@ -51,18 +52,19 @@ $content-width: calc(max(70vw,400px));
         .link {
             font-size: 1rem;
             font-weight: 400;
+            background-color: #ccc;
+            transition: 200ms all ease-in-out;
         }
 
-        .link::before {
-            content: "(";
+        .link:hover {
+            background-color: #999;
+            transition: 200ms all ease-in-out;
         }
 
-        .link::after {
-            content: ")";
-        }
-
-        .image {
-
+        .imageFrame {
+            width: 100vw;
+            height: 25vh;
+            max-width: 42rem;
         }
     }
 
@@ -72,15 +74,20 @@ $content-width: calc(max(70vw,400px));
         flex-direction: row;
         width: $content-width;
 
+        .contentLeft {
+            width: 20%;
+            padding: 1rem;
+        }
+
         .contentRight {
-            width: 95%;
+            width: 80%;
             padding: 1rem;
             white-space: nowrap;
 
             .name {
                 font-size: 3rem;
                 font-weight: 900;
-                padding: 0.5rem;
+                padding: 1rem;
                 color: $black;
                 display: inline-block;
                 transition: 300ms all ease-in-out;
@@ -96,15 +103,16 @@ $content-width: calc(max(70vw,400px));
                 font-size: 3rem;
                 font-weight: 900;
                 color: $black;
-                padding: 0.5rem;
+                padding: 0.3rem;
                 display: inline-block;
-                margin-left: 0.5rem;
+                margin-left: 0.3rem;
                 transition: 200ms all;
             }
 
             .emoji:hover {
                 transform: rotate(15deg);
                 transition: 200ms all;
+                cursor: default;
             }
         }
     }
@@ -119,20 +127,31 @@ $content-width: calc(max(70vw,400px));
 
 @media (min-width: 600px) {
     .contentLeft {
-        width: 30%;
+        width: 20%;
         min-width: 200px;
         padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
 
         .item {
             font-size: 1.3rem;
             font-weight: 900;
             padding: 0.2rem;
             white-space: nowrap;
+            transition: 200ms all ease-in-out;
+            width: fit-content;
+        }
+
+        .item:hover {
+            background-color: $black;
+            color: white;
+            transition: 200ms all ease-in-out;
         }
     }
 
     .contentRight {
-        width: 90%;
+        width: 80%;
         padding: 1rem;
     }
 }
@@ -148,11 +167,26 @@ $content-width: calc(max(70vw,400px));
             font-weight: 900;
             padding: 0.2rem;
             white-space: nowrap;
+            transition: 200ms all ease-in-out;
+            width: fit-content;
+            float: right;
+        }
+
+        .item:hover {
+            background-color: $black;
+            color: white;
+            transition: 200ms all ease-in-out;
         }
     }
 
     .contentRight {
         width: 100%;
         padding: 1rem;
+    }
+}
+
+.lang {
+    img {
+        height: calc(max(10%,10px))
     }
 }
