@@ -1,0 +1,158 @@
+$black: #000000;
+$white: #FFFFFF;
+$content-width: calc(max(70vw,400px));
+
+//main stuff
+.everything {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    flex-direction: column;
+
+    .paragraph {
+        padding: 1rem;
+
+        .title {
+            font-size: 1.3rem;
+            font-weight: 900;
+        }
+
+        .description {
+            font-size: 1rem;
+            font-weight: 400;
+        }
+    }
+
+    .bigtitle {
+        font-size: 1.5rem;
+        font-weight: 900;
+        padding: 1rem;
+        padding-bottom: 0;
+        width: fit-content;
+        white-space: nowrap;
+    }
+
+    .card {
+        padding: 1rem;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+
+        .title {
+            font-size: 1.3rem;
+            font-weight: 900;
+        }
+
+        .description {
+            font-size: 1rem;
+            font-weight: 400;
+        }
+
+        .link {
+            font-size: 1rem;
+            font-weight: 400;
+        }
+
+        .link::before {
+            content: "(";
+        }
+
+        .link::after {
+            content: ")";
+        }
+
+        .image {
+
+        }
+    }
+
+    .container {
+        height: 20%;
+        display: flex;
+        flex-direction: row;
+        width: $content-width;
+
+        .contentRight {
+            width: 95%;
+            padding: 1rem;
+            white-space: nowrap;
+
+            .name {
+                font-size: 3rem;
+                font-weight: 900;
+                padding: 0.5rem;
+                color: $black;
+                display: inline-block;
+                transition: 300ms all ease-in-out;
+            }
+
+            .name:hover {
+                background-color: #FF8983;
+                color: $white;
+                transition: 300ms all ease-in-out;
+            }
+
+            .emoji {
+                font-size: 3rem;
+                font-weight: 900;
+                color: $black;
+                padding: 0.5rem;
+                display: inline-block;
+                margin-left: 0.5rem;
+                transition: 200ms all;
+            }
+
+            .emoji:hover {
+                transform: rotate(15deg);
+                transition: 200ms all;
+            }
+        }
+    }
+
+    .content {
+        height: 80%;
+        width: $content-width;
+        display: flex;
+        flex-direction: row;
+    }
+}
+
+@media (min-width: 600px) {
+    .contentLeft {
+        width: 30%;
+        min-width: 200px;
+        padding: 2rem;
+
+        .item {
+            font-size: 1.3rem;
+            font-weight: 900;
+            padding: 0.2rem;
+            white-space: nowrap;
+        }
+    }
+
+    .contentRight {
+        width: 90%;
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .contentLeft {
+        width: 0%;
+        padding: 2rem;
+        display: none;
+
+        .item {
+            font-size: 1.3rem;
+            font-weight: 900;
+            padding: 0.2rem;
+            white-space: nowrap;
+        }
+    }
+
+    .contentRight {
+        width: 100%;
+        padding: 1rem;
+    }
+}
