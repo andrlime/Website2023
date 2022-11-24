@@ -12,6 +12,7 @@ $content-width: calc(max(70vw,400px));
 
     .paragraph {
         padding: 1rem;
+        padding-bottom: 0;
 
         .title {
             font-size: 1.3rem;
@@ -27,8 +28,8 @@ $content-width: calc(max(70vw,400px));
     .bigtitle {
         font-size: 1.5rem;
         font-weight: 900;
-        padding: 1rem;
         padding-bottom: 0;
+        margin: 0;
         width: fit-content;
         white-space: nowrap;
     }
@@ -62,9 +63,10 @@ $content-width: calc(max(70vw,400px));
         }
 
         .imageFrame {
-            width: 100vw;
+            min-width: 300px;
+            width: 50vw;
             height: 25vh;
-            max-width: 42rem;
+            max-width: 36rem;
         }
     }
 

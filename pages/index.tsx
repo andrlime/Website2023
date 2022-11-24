@@ -5,12 +5,25 @@ import Head from 'next/head';
 import styles from '../styles/Q.module.css';
 import axios from 'axios';
 
+const Skills: FunctionComponent = () => {
+  let languages = ["TypeScript", "JavaScript", "React", "Next.js", "Node.js", "Express.js", "Python",
+    "Racket", "Sass", "Julia", "Adobe Photoshop", "Adobe InDesign", "Adobe Illustrator", "Canva", "DigitalOcean", "Git", "MongoDB"];
+  return (
+    <div style={{width: "75%"}}>
+    {languages.map((i: any, index: number) => (
+      <img style={{padding: "0.1rem"}} src={`https://img.shields.io/static/v1?label=&message=${i.charAt(0).toUpperCase() + i.slice(1)}&style=flat&logo=${i}&labelColor=cbcbcb`}/>
+    ))}
+    <p style={{margin: "0"}}>For a full list, see my resumé</p>
+    </div>
+  );
+}
+
 const Card: FunctionComponent<{ title: string, link: string, description: string, languageId: string, imageUrl?: string }> = ({title, link, description, languageId, imageUrl}) => {
   return (
     <div className={styles.card}>
       <div><span className={styles.title}>{title}</span>&nbsp;{link!="none" ? <span className={styles.link} style={{padding: "0.5rem", display: "inline-block", borderRadius: "5rem", lineHeight: "0"}}><a href={link}><img src="/link.png" width="15"/></a></span> : <></>} </div>
       <div className={styles.lang}><img src={`https://img.shields.io/static/v1?label=&message=${languageId.charAt(0).toUpperCase() + languageId.slice(1)}&style=flat&logo=${languageId}&labelColor=cbcbcb`}/></div>
-      <div className={styles.imageFrame} style={{backgroundImage: `url(${imageUrl})`, backgroundPosition: "left", backgroundSize: "contain", backgroundRepeat: "no-repeat"}}></div>
+      <div className={styles.imageFrame} style={{backgroundImage: `url(${imageUrl})`, backgroundPosition: "left", backgroundSize: "cover", backgroundRepeat: "no-repeat"}}></div>
       <div className={styles.description}>{description}</div>
     </div>
   );
@@ -37,6 +50,12 @@ const Home: NextPage = () => {
     .then((res) => {
         if(res.data !== null) {
         setLoadedPara(true);
+
+        let content = res.data;
+        // set resume
+        content[1].content = (<>I have two resumés: <b><a href="/stem.pdf">STEM and CS</a></b> and <b><a href="/hum.pdf">Humanities</a></b></>);
+        content[2].content = (<Skills/>)
+
         setParagraphs(res.data);
         }
     });
@@ -70,15 +89,27 @@ const Home: NextPage = () => {
           {loadedPara ? paragraphs.map((i: any) => (
             <div className={styles.item}><a href={`#${i.htmlid}`}>{i.title}</a></div>
           )) : "Loading..."}
+          <div className={styles.item}><a href={`#projects`}>Personal Projects</a></div>
+          <div>
+            <a href="https://github.com/andrlime"><img src="/github.svg" style={{margin: "0.2rem"}} width={30}/></a>
+            <a href="mailto:anli@u.northwestern.edu"><img src="/mail.svg" style={{margin: "0.2rem"}} width={30}/></a>
+          </div>
         </div>
         <div className={styles.contentRight}>
-          {loadedPara ? paragraphs.map((i: any) => (
-            <Paragraph key={i} id={i.htmlid} title={i.title} description={i.content}/>
+          {loadedPara ? paragraphs.map((i: any, index: number) => (
+            <Paragraph key={index*100} id={i.htmlid} title={i.title} description={i.content}/>
           )) : "Loading..."}
-          {loadedProj ? projects.map((i: any) => (
-            <Card key={i} title={i.title} link={i.link} description={i.content} languageId={i.mainLanguage} imageUrl={i.imageUrl}/>
+          <div className={styles.paragraph}>
+            <div className={styles.bigtitle} id={"projects"}>Personal Projects</div>
+          </div>
+          {loadedProj ? projects.map((i: any, index: number) => (
+            <Card key={index*1000} title={i.title} link={i.link} description={i.content} languageId={i.mainLanguage} imageUrl={i.imageUrl}/>
           )) : "Loading..."}
         </div>
+      </div>
+      <div style={{marginBottom: "1rem", display: "flex", flexDirection: "row", justifyContent: "space-around"}}>
+        <a href="https://github.com/andrlime"><img src="/github.svg" style={{margin: "0.2rem"}} width={30}/></a>
+        <a href="mailto:anli@u.northwestern.edu"><img src="/mail.svg" style={{margin: "0.2rem"}} width={30}/></a>
       </div>
     </div>
   );
