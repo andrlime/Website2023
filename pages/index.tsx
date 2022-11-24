@@ -93,6 +93,7 @@ const Home: NextPage = () => {
           <div>
             <a href="https://github.com/andrlime"><img src="/github.svg" style={{margin: "0.2rem"}} width={30}/></a>
             <a href="mailto:anli@u.northwestern.edu"><img src="/mail.svg" style={{margin: "0.2rem"}} width={30}/></a>
+            <a href="https://www.linkedin.com/in/andrew-li-41778a223/"><img src="/linkedin.svg" style={{margin: "0.2rem"}} width={30}/></a>
           </div>
         </div>
         <div className={styles.contentRight}>
@@ -110,6 +111,7 @@ const Home: NextPage = () => {
       <div style={{marginBottom: "1rem", display: "flex", flexDirection: "row", justifyContent: "space-around"}}>
         <a href="https://github.com/andrlime"><img src="/github.svg" style={{margin: "0.2rem"}} width={30}/></a>
         <a href="mailto:anli@u.northwestern.edu"><img src="/mail.svg" style={{margin: "0.2rem"}} width={30}/></a>
+        <a href="https://www.linkedin.com/in/andrew-li-41778a223/"><img src="/linkedin.svg" style={{margin: "0.2rem"}} width={30}/></a>
       </div>
     </div>
   );
