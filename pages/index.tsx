@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import type { NextPage } from 'next';
-import React, { FunctionComponent, useEffect, useState, useRef } from 'react';
+import React, { FunctionComponent, useEffect, useRef } from 'react';
 import Head from 'next/head';
 import styles from '../styles/Q.module.css';
 import axios from 'axios';
@@ -66,6 +66,12 @@ const Paragraph: FunctionComponent<{ title: string, id: string, description: str
   );
 }
 
+const ContactBar: FunctionComponent = () => (<div style={{marginBottom: "1rem", display: "flex", flexDirection: "row", justifyContent: "space-around"}}>
+<a href="https://github.com/andrlime"><img src="/github.svg" alt="github" style={{margin: "0.2rem"}} width={30}/></a>
+<a href="mailto:anli@u.northwestern.edu"><img src="/mail.svg" alt="email" style={{margin: "0.2rem"}} width={30}/></a>
+<a href="https://www.linkedin.com/in/andrew-li-41778a223/"><img src="/linkedin.svg" alt="linkedin" style={{margin: "0.2rem"}} width={30}/></a>
+</div>)
+
 const Home: NextPage = () => {
   const loadedProj = useRef(false);
   const loadedPara = useRef(false);
@@ -110,12 +116,6 @@ const Home: NextPage = () => {
     });
   }, []);
 
-  let contactBar = (<div style={{marginBottom: "1rem", display: "flex", flexDirection: "row", justifyContent: "space-around"}}>
-    <a href="https://github.com/andrlime"><img src="/github.svg" alt="github" style={{margin: "0.2rem"}} width={30}/></a>
-    <a href="mailto:anli@u.northwestern.edu"><img src="/mail.svg" alt="email" style={{margin: "0.2rem"}} width={30}/></a>
-    <a href="https://www.linkedin.com/in/andrew-li-41778a223/"><img src="/linkedin.svg" alt="linkedin" style={{margin: "0.2rem"}} width={30}/></a>
-  </div>)
-
   return (
     <div className={styles.everything}>
       <Head>
@@ -137,19 +137,20 @@ const Home: NextPage = () => {
             <div key={index*115323} className={styles.item}><a href={`#${i.htmlid}`}>{i.title}</a></div>
           )) : "Loading..."}
           <div className={styles.item}><a href={`#projects`}>Personal Projects</a></div>
-          {contactBar}
+          <ContactBar/>
         </div>
 
         <div className={styles.contentRight}>
           {loadedPara.current ? paragraphs.current.map((i: any, index: number) => (
             <Paragraph key={index*100} id={i.htmlid} title={i.title} description={i.content}/>
           )) : "Loading..."}
+          
           <div className={styles.paragraph}>
             <div className={styles.bigtitle} id={"projects"}>Personal Projects</div>
             <div>Filter by language:
-              <div>{languageList.current}</div>
             </div>
           </div>
+
           {loadedProj.current ? projects.current.map((i: any, index: number) => (
             <Card key={index*1000} title={i.title} link={i.link} description={i.content} languageId={i.mainLanguage} imageUrl={i.imageUrl}/>
           )) : "Loading..."}
@@ -157,7 +158,7 @@ const Home: NextPage = () => {
       
       </div>
 
-      {contactBar}
+      <ContactBar/>
     </div>
   );
 };
