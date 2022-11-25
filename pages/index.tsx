@@ -67,8 +67,8 @@ const Paragraph: FunctionComponent<{ title: string, id: string, description: str
 }
 
 const Home: NextPage = () => {
-  const [loadedPara, setLoadedPara] = useState(false);
-  const [loadedProj, setLoadedProj] = useState(false);
+  const loadedProj = useRef(false);
+  const loadedPara = useRef(false);
   const paragraphs = useRef([]);
   const projects = useRef([]);
   const languageList = useRef<string[]>([]);
@@ -79,7 +79,7 @@ const Home: NextPage = () => {
     .get("api/paragraphs")
     .then((res) => {
         if(res.data !== null) {
-        setLoadedPara(true);
+        loadedPara.current = (true);
 
         let content = res.data;
         // set content that requires react components
@@ -98,7 +98,7 @@ const Home: NextPage = () => {
     .get("api/projects")
     .then((res) => {
         if(res.data !== null) {
-          setLoadedProj(true);
+          loadedProj.current = (true);
           temp = res.data;
           projects.current = (res.data);
         }
@@ -133,7 +133,7 @@ const Home: NextPage = () => {
       <div className={styles.content}>
 
         <div className={styles.contentLeft}>
-          {loadedPara ? paragraphs.current.map((i: any, index: number) => (
+          {loadedPara.current ? paragraphs.current.map((i: any, index: number) => (
             <div key={index*115323} className={styles.item}><a href={`#${i.htmlid}`}>{i.title}</a></div>
           )) : "Loading..."}
           <div className={styles.item}><a href={`#projects`}>Personal Projects</a></div>
@@ -141,7 +141,7 @@ const Home: NextPage = () => {
         </div>
 
         <div className={styles.contentRight}>
-          {loadedPara ? paragraphs.current.map((i: any, index: number) => (
+          {loadedPara.current ? paragraphs.current.map((i: any, index: number) => (
             <Paragraph key={index*100} id={i.htmlid} title={i.title} description={i.content}/>
           )) : "Loading..."}
           <div className={styles.paragraph}>
@@ -150,7 +150,7 @@ const Home: NextPage = () => {
               <div>{languageList.current}</div>
             </div>
           </div>
-          {loadedProj ? projects.current.map((i: any, index: number) => (
+          {loadedProj.current ? projects.current.map((i: any, index: number) => (
             <Card key={index*1000} title={i.title} link={i.link} description={i.content} languageId={i.mainLanguage} imageUrl={i.imageUrl}/>
           )) : "Loading..."}
         </div>
