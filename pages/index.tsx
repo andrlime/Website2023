@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import type { NextPage } from 'next';
-import React, { FunctionComponent, useEffect, useRef } from 'react';
+import React, { FunctionComponent, useEffect, useRef, useState } from 'react';
 import Head from 'next/head';
 import styles from '../styles/Q.module.css';
 import axios from 'axios';
@@ -73,8 +73,9 @@ const ContactBar: FunctionComponent = () => (<div style={{marginBottom: "1rem", 
 </div>)
 
 const Home: NextPage = () => {
-  const loadedProj = useRef(false);
-  const loadedPara = useRef(false);
+  const [loadedProj, setLoadedProj] = useState(false);
+  const [loadedPara, setLoadedPara] = useState(false);
+  const [filter, setFilter] = useState("");
   const paragraphs = useRef([]);
   const projects = useRef([]);
   const languageList = useRef<string[]>([]);
@@ -85,7 +86,7 @@ const Home: NextPage = () => {
     .get("api/paragraphs")
     .then((res) => {
         if(res.data !== null) {
-        loadedPara.current = (true);
+        setLoadedPara(true);
 
         let content = res.data;
         // set content that requires react components
@@ -104,7 +105,7 @@ const Home: NextPage = () => {
     .get("api/projects")
     .then((res) => {
         if(res.data !== null) {
-          loadedProj.current = (true);
+          setLoadedProj(true);
           temp = res.data;
           projects.current = (res.data);
         }
@@ -133,7 +134,7 @@ const Home: NextPage = () => {
       <div className={styles.content}>
 
         <div className={styles.contentLeft}>
-          {loadedPara.current ? paragraphs.current.map((i: any, index: number) => (
+          {loadedPara ? paragraphs.current.map((i: any, index: number) => (
             <div key={index*115323} className={styles.item}><a href={`#${i.htmlid}`}>{i.title}</a></div>
           )) : "Loading..."}
           <div className={styles.item}><a href={`#projects`}>Personal Projects</a></div>
@@ -141,17 +142,27 @@ const Home: NextPage = () => {
         </div>
 
         <div className={styles.contentRight}>
-          {loadedPara.current ? paragraphs.current.map((i: any, index: number) => (
+          {loadedPara ? paragraphs.current.map((i: any, index: number) => (
             <Paragraph key={index*100} id={i.htmlid} title={i.title} description={i.content}/>
           )) : "Loading..."}
           
           <div className={styles.paragraph}>
             <div className={styles.bigtitle} id={"projects"}>Personal Projects</div>
-            <div>Filter by language:
+            <div>Filter by language:</div>
+            <div className={styles.contentWide} id={styles.filters}>
+              <img onClick={(e: any) => {
+                setFilter("");
+              }} style={{padding: "0.1rem", backgroundColor: filter=="" ? "#1b1717" : ""}} alt={"reset filter"} key={-1982} src={`https://img.shields.io/badge/-Reset-1b1717`}/>
+            {languageList.current.map((element: string, index: number) => (
+              <img onClick={(e: any) => {
+                let t = e.target;
+                setFilter(t.alt);
+              }} style={{padding: "0.1rem", backgroundColor: filter==element ? "#1b1717" : ""}} alt={element} key={element} src={`https://img.shields.io/static/v1?label=&message=${element.charAt(0).toUpperCase() + element.slice(1)}&style=flat&logo=${element}&labelColor=cbcbcb`}/>
+            ))}
             </div>
           </div>
 
-          {loadedProj.current ? projects.current.map((i: any, index: number) => (
+          {loadedProj ? (projects.current.filter((e: any) => e.mainLanguage.includes(filter))).map((i: any, index: number) => (
             <Card key={index*1000} title={i.title} link={i.link} description={i.content} languageId={i.mainLanguage} imageUrl={i.imageUrl}/>
           )) : "Loading..."}
         </div>
