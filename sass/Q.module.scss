@@ -17,6 +17,26 @@ $accent2: #eec3c4;
     align-items: center;
     flex-direction: column;
 
+    .contentWide {
+        min-width: 300px;
+        width: 50vw;
+        max-width: 36rem;
+    }
+
+    #filters {
+        img {
+            border-radius: 5rem;
+            transition: 300ms all ease-in-out;
+            margin-right: 1rem;
+        }
+
+        img:hover {
+            cursor: pointer;
+            background-color: $black;
+            transition: 300ms all ease-in-out;
+        }
+    }
+
     .skillsBox { // skills language box
         display: flex;
         flex-direction: column;
@@ -142,6 +162,7 @@ $accent2: #eec3c4;
             .name:hover {
                 background-color: $prim;
                 color: $white;
+                cursor: pointer;
                 transition: 300ms all ease-in-out;
             }
 
