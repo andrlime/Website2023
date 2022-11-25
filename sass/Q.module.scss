@@ -1,6 +1,6 @@
 $black: #1b1717;
 $white: #FFFFFF;
-$content-width: calc(max(70vw,400px));
+$content-width: calc(max(75vw,400px));
 
 //main stuff
 .everything {
@@ -9,6 +9,26 @@ $content-width: calc(max(70vw,400px));
     height: 100%;
     align-items: center;
     flex-direction: column;
+
+    .skillsBox {
+        display: flex;
+        flex-direction: column;
+        .skillsLeft {
+            width: 100%;
+            min-width: 250px;
+            font-weight: 700;
+        }
+
+        .skillsRight {
+            width: 100%;
+        }
+    }
+
+    .lang {
+        img {
+            height: calc(max(10%,10px))
+        }
+    }
 
     .paragraph {
         padding: 1rem;
@@ -38,7 +58,7 @@ $content-width: calc(max(70vw,400px));
         padding: 1rem;
         padding-top: 0.5rem;
         padding-bottom: 0.5rem;
-        width: calc(max(60%,300px));
+        width: calc(max(70%,300px));
         white-space: nowrap;
 
         .title {
@@ -51,6 +71,9 @@ $content-width: calc(max(70vw,400px));
             font-size: 1rem;
             font-weight: 400;
             white-space: normal;
+            min-width: 300px;
+            width: 50vw;
+            max-width: 36rem;
         }
 
         .link {
@@ -187,11 +210,5 @@ $content-width: calc(max(70vw,400px));
     .contentRight {
         width: 100%;
         padding: 1rem;
-    }
-}
-
-.lang {
-    img {
-        height: calc(max(10%,10px))
     }
 }

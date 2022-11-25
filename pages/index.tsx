@@ -6,12 +6,32 @@ import styles from '../styles/Q.module.css';
 import axios from 'axios';
 
 const Skills: FunctionComponent = () => {
-  let languages = ["TypeScript", "JavaScript", "React", "Next.js", "Node.js", "Express", "Python",
-    "Racket", "Sass", "Julia", "Adobe Photoshop", "Adobe InDesign", "Adobe Illustrator", "Canva", "DigitalOcean", "Git", "MongoDB"];
+  type SkillSet = {
+    label: string,
+    skills: Array<string>
+  }
+
+  let langs: Array<SkillSet> = [
+    {label: "Programming Languages and Frameworks", skills: ["Julia", "TypeScript", "JavaScript", "React", "Next.js", "Node.js", "Express", "Python",
+    "Racket", "Sass", "Jupyter", "FFmpeg"]},
+    {label: "Graphical Skills", skills: ["Adobe Photoshop", "Adobe InDesign", "Adobe Illustrator", "Canva"]},
+    {label: "Other Technical Skills", skills: ["DigitalOcean", "Git", "MongoDB"]}
+  ]
+
   return (
     <div style={{width: "75%"}}>
-    {languages.map((i: any, index: number) => (
-      <img style={{padding: "0.1rem"}} src={`https://img.shields.io/static/v1?label=&message=${i.charAt(0).toUpperCase() + i.slice(1)}&style=flat&logo=${i}&labelColor=cbcbcb`}/>
+    {langs.map((i: any) => (
+      <div className={styles.skillsBox}>
+        <div className={styles.skillsLeft}>
+          {i.label}:
+        </div>
+        <div className={styles.skillsRight}>
+        {i.skills.map((j: any, index: number) => (
+          <img key={index} style={{padding: "0.1rem"}} src={`https://img.shields.io/static/v1?label=&message=${j.charAt(0).toUpperCase() + j.slice(1)}&style=flat&logo=${j}&labelColor=cbcbcb`}/>
+        )
+        )}
+        </div>
+      </div>
     ))}
     <p style={{margin: "0"}}>For a full list, see my resumé</p>
     </div>
@@ -101,7 +121,7 @@ const Home: NextPage = () => {
           <div className={styles.item}><a href={`#projects`}>Personal Projects</a></div>
           {contactBar}
         </div>
-        
+
         <div className={styles.contentRight}>
           {loadedPara ? paragraphs.map((i: any, index: number) => (
             <Paragraph key={index*100} id={i.htmlid} title={i.title} description={i.content}/>
