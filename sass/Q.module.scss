@@ -25,6 +25,10 @@ $content-width: calc(max(75vw,400px));
     }
 
     .lang {
+        min-width: 300px;
+        width: 50vw;
+        max-width: 36rem;
+        white-space: normal;
         img {
             height: calc(max(10%,10px))
         }
