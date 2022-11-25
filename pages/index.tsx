@@ -6,12 +6,32 @@ import styles from '../styles/Q.module.css';
 import axios from 'axios';
 
 const Skills: FunctionComponent = () => {
-  let languages = ["TypeScript", "JavaScript", "React", "Next.js", "Node.js", "Express", "Python",
-    "Racket", "Sass", "Julia", "Adobe Photoshop", "Adobe InDesign", "Adobe Illustrator", "Canva", "DigitalOcean", "Git", "MongoDB"];
+  type SkillSet = {
+    label: string,
+    skills: Array<string>
+  }
+
+  let langs: Array<SkillSet> = [
+    {label: "Programming Languages and Frameworks", skills: ["Julia", "TypeScript", "JavaScript", "React", "Next.js", "Node.js", "Express", "Python",
+    "Racket", "Sass", "Jupyter", "FFmpeg"]},
+    {label: "Graphical Skills", skills: ["Adobe Photoshop", "Adobe InDesign", "Adobe Illustrator", "Canva"]},
+    {label: "Other Technical Skills", skills: ["DigitalOcean", "Git", "MongoDB"]}
+  ]
+
   return (
     <div style={{width: "75%"}}>
-    {languages.map((i: any, index: number) => (
-      <img style={{padding: "0.1rem"}} src={`https://img.shields.io/static/v1?label=&message=${i.charAt(0).toUpperCase() + i.slice(1)}&style=flat&logo=${i}&labelColor=cbcbcb`}/>
+    {langs.map((i: any) => (
+      <div className={styles.skillsBox}>
+        <div className={styles.skillsLeft}>
+          {i.label}:
+        </div>
+        <div className={styles.skillsRight}>
+        {i.skills.map((j: any, index: number) => (
+          <img key={index} style={{padding: "0.1rem"}} src={`https://img.shields.io/static/v1?label=&message=${j.charAt(0).toUpperCase() + j.slice(1)}&style=flat&logo=${j}&labelColor=cbcbcb`}/>
+        )
+        )}
+        </div>
+      </div>
     ))}
     <p style={{margin: "0"}}>For a full list, see my resumé</p>
     </div>
@@ -45,6 +65,7 @@ const Home: NextPage = () => {
   const [projects, setProjects] = useState<Array<{ title: string, link: string, description: string, imageUrl?: string }>>([])
 
   useEffect(() => {
+    // get paragraphs content from api route
     axios
     .get("api/paragraphs")
     .then((res) => {
@@ -52,7 +73,7 @@ const Home: NextPage = () => {
         setLoadedPara(true);
 
         let content = res.data;
-        // set resume
+        // set content that requires react components
         content[1].content = (<>I have two resumés: <b><a href="/stem.pdf">STEM and CS</a></b> and <b><a href="/hum.pdf">Humanities</a></b></>);
         content[2].content = (<Skills/>)
 
@@ -60,6 +81,7 @@ const Home: NextPage = () => {
         }
     });
 
+    // get projects from api route
     axios
     .get("api/projects")
     .then((res) => {
@@ -69,6 +91,12 @@ const Home: NextPage = () => {
         }
     });
   }, []);
+
+  let contactBar = (<div style={{marginBottom: "1rem", display: "flex", flexDirection: "row", justifyContent: "space-around"}}>
+    <a href="https://github.com/andrlime"><img src="/github.svg" style={{margin: "0.2rem"}} width={30}/></a>
+    <a href="mailto:anli@u.northwestern.edu"><img src="/mail.svg" style={{margin: "0.2rem"}} width={30}/></a>
+    <a href="https://www.linkedin.com/in/andrew-li-41778a223/"><img src="/linkedin.svg" style={{margin: "0.2rem"}} width={30}/></a>
+  </div>)
 
   return (
     <div className={styles.everything}>
@@ -85,17 +113,15 @@ const Home: NextPage = () => {
       </div>
       
       <div className={styles.content}>
+
         <div className={styles.contentLeft}>
           {loadedPara ? paragraphs.map((i: any) => (
             <div className={styles.item}><a href={`#${i.htmlid}`}>{i.title}</a></div>
           )) : "Loading..."}
           <div className={styles.item}><a href={`#projects`}>Personal Projects</a></div>
-          <div>
-            <a href="https://github.com/andrlime"><img src="/github.svg" style={{margin: "0.2rem"}} width={30}/></a>
-            <a href="mailto:anli@u.northwestern.edu"><img src="/mail.svg" style={{margin: "0.2rem"}} width={30}/></a>
-            <a href="https://www.linkedin.com/in/andrew-li-41778a223/"><img src="/linkedin.svg" style={{margin: "0.2rem"}} width={30}/></a>
-          </div>
+          {contactBar}
         </div>
+
         <div className={styles.contentRight}>
           {loadedPara ? paragraphs.map((i: any, index: number) => (
             <Paragraph key={index*100} id={i.htmlid} title={i.title} description={i.content}/>
@@ -107,12 +133,10 @@ const Home: NextPage = () => {
             <Card key={index*1000} title={i.title} link={i.link} description={i.content} languageId={i.mainLanguage} imageUrl={i.imageUrl}/>
           )) : "Loading..."}
         </div>
+      
       </div>
-      <div style={{marginBottom: "1rem", display: "flex", flexDirection: "row", justifyContent: "space-around"}}>
-        <a href="https://github.com/andrlime"><img src="/github.svg" style={{margin: "0.2rem"}} width={30}/></a>
-        <a href="mailto:anli@u.northwestern.edu"><img src="/mail.svg" style={{margin: "0.2rem"}} width={30}/></a>
-        <a href="https://www.linkedin.com/in/andrew-li-41778a223/"><img src="/linkedin.svg" style={{margin: "0.2rem"}} width={30}/></a>
-      </div>
+
+      {contactBar}
     </div>
   );
 };
