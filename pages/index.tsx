@@ -39,10 +39,18 @@ const Skills: FunctionComponent = () => {
 }
 
 const Card: FunctionComponent<{ title: string, link: string, description: string, languageId: string, imageUrl?: string }> = ({title, link, description, languageId, imageUrl}) => {
+  let languageIdList: string[] = languageId.match(/[\w-.][^\s,]*/g) || [""];
+  console.log(languageIdList);
   return (
     <div className={styles.card}>
       <div><span className={styles.title}>{title}</span>&nbsp;{link!="none" ? <a href={link}><span className={styles.link} style={{padding: "0.5rem", display: "inline-block", borderRadius: "5rem", lineHeight: "0"}}><img src="/link.png" width="15"/></span></a> : <></>} </div>
-      <div className={styles.lang}><img src={`https://img.shields.io/static/v1?label=&message=${languageId.charAt(0).toUpperCase() + languageId.slice(1)}&style=flat&logo=${languageId}&labelColor=cbcbcb`}/></div>
+      
+      <div className={styles.lang}>
+        {languageIdList.map((element: string, index: number) => (
+          <img key={index} src={`https://img.shields.io/static/v1?label=&message=${element.charAt(0).toUpperCase() + element.slice(1)}&style=flat&logo=${element}&labelColor=cbcbcb`}/>
+        ))}
+      </div>
+      
       <div className={styles.imageFrame} style={{backgroundImage: `url(${imageUrl})`, backgroundPosition: "left", backgroundSize: "cover", backgroundRepeat: "no-repeat"}}></div>
       <div className={styles.description}>{description}</div>
     </div>
