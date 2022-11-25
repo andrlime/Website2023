@@ -134,13 +134,13 @@ $accent2: #eec3c4;
                 font-size: 3rem;
                 font-weight: 900;
                 padding: 1rem;
-                color: $black;
+                color: $prim;
                 display: inline-block;
                 transition: 300ms all ease-in-out;
             }
 
             .name:hover {
-                background-color: #FF8983;
+                background-color: $prim;
                 color: $white;
                 transition: 300ms all ease-in-out;
             }
@@ -187,11 +187,12 @@ $accent2: #eec3c4;
             white-space: nowrap;
             transition: 200ms all ease-in-out;
             width: fit-content;
+            color: $black;
         }
 
         .item:hover {
-            background-color: $black;
-            color: white;
+            background-color: $prim;
+            color: $white;
             transition: 200ms all ease-in-out;
         }
     }
