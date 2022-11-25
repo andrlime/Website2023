@@ -1,5 +1,5 @@
 $black: #1b1717;
-$white: #F3EED9;
+$white: #f5f1e4;
 $content-width: calc(max(75vw,400px));
 
 //define colors
@@ -7,6 +7,7 @@ $dark: #4F0000;
 $prim: #FF6F61;
 $accent: #FF868E;
 $light: #FFA0BC;
+$accent2: #eec3c4;
 
 //main stuff
 .everything {
@@ -21,13 +22,8 @@ $light: #FFA0BC;
         flex-direction: column;
         color: $dark;
         .skillsLeft {
-            width: 100%;
             min-width: 250px;
             font-weight: 700;
-        }
-
-        .skillsRight {
-            width: 100%;
         }
     }
 
@@ -36,8 +32,26 @@ $light: #FFA0BC;
         width: 50vw;
         max-width: 36rem;
         white-space: normal;
+        display: flex;
+        align-items: center;
         img {
             height: calc(max(10%,10px))
+        }
+
+        .link {
+            font-size: 1rem;
+            font-weight: 400;
+            background-color: $white;
+            transition: 200ms all ease-in-out;
+            display: inline-block;
+            border-radius: 5rem;
+            line-height: 0;
+            padding: 0.25rem;
+        }
+
+        .link:hover {
+            background-color: $accent2;
+            transition: 200ms all ease-in-out;
         }
     }
 
@@ -90,18 +104,6 @@ $light: #FFA0BC;
             width: 50vw;
             max-width: 36rem;
             color: $dark;
-        }
-
-        .link {
-            font-size: 1rem;
-            font-weight: 400;
-            background-color: #ccc;
-            transition: 200ms all ease-in-out;
-        }
-
-        .link:hover {
-            background-color: $accent;
-            transition: 200ms all ease-in-out;
         }
 
         .imageFrame {
