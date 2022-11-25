@@ -142,6 +142,7 @@ $accent2: #eec3c4;
             .name:hover {
                 background-color: $prim;
                 color: $white;
+                cursor: pointer;
                 transition: 300ms all ease-in-out;
             }
 
