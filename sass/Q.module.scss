@@ -1,6 +1,12 @@
 $black: #1b1717;
-$white: #FFFFFF;
+$white: #F3EED9;
 $content-width: calc(max(75vw,400px));
+
+//define colors
+$dark: #4F0000;
+$prim: #FF6F61;
+$accent: #FF868E;
+$light: #FFA0BC;
 
 //main stuff
 .everything {
@@ -10,9 +16,10 @@ $content-width: calc(max(75vw,400px));
     align-items: center;
     flex-direction: column;
 
-    .skillsBox {
+    .skillsBox { // skills language box
         display: flex;
         flex-direction: column;
+        color: $dark;
         .skillsLeft {
             width: 100%;
             min-width: 250px;
@@ -24,7 +31,7 @@ $content-width: calc(max(75vw,400px));
         }
     }
 
-    .lang {
+    .lang { // language box
         min-width: 300px;
         width: 50vw;
         max-width: 36rem;
@@ -34,31 +41,34 @@ $content-width: calc(max(75vw,400px));
         }
     }
 
-    .paragraph {
+    .paragraph { // each paragraph element
         padding: 1rem;
         padding-bottom: 0;
 
         .title {
             font-size: 1.3rem;
             font-weight: 900;
+            color: $prim;
         }
 
         .description {
             font-size: 1rem;
             font-weight: 400;
+            color: $dark;
         }
     }
 
-    .bigtitle {
+    .bigtitle { // large heading
         font-size: 1.5rem;
         font-weight: 900;
         padding-bottom: 0;
         margin: 0;
         width: fit-content;
         white-space: nowrap;
+        color: $prim;
     }
 
-    .card {
+    .card { // individual items for each project
         padding: 1rem;
         padding-top: 0.5rem;
         padding-bottom: 0.5rem;
@@ -69,6 +79,7 @@ $content-width: calc(max(75vw,400px));
             font-size: 1.3rem;
             font-weight: 900;
             white-space: normal;
+            color: $prim;
         }
 
         .description {
@@ -78,6 +89,7 @@ $content-width: calc(max(75vw,400px));
             min-width: 300px;
             width: 50vw;
             max-width: 36rem;
+            color: $dark;
         }
 
         .link {
@@ -88,7 +100,7 @@ $content-width: calc(max(75vw,400px));
         }
 
         .link:hover {
-            background-color: #999;
+            background-color: $accent;
             transition: 200ms all ease-in-out;
         }
 
@@ -100,7 +112,7 @@ $content-width: calc(max(75vw,400px));
         }
     }
 
-    .container {
+    .container { // header div flex box
         height: 20%;
         display: flex;
         flex-direction: row;
@@ -149,7 +161,7 @@ $content-width: calc(max(75vw,400px));
         }
     }
 
-    .content {
+    .content { // content level div flex box
         height: 80%;
         width: $content-width;
         display: flex;
