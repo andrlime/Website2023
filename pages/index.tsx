@@ -13,7 +13,7 @@ const Skills: FunctionComponent = () => {
 
   let langs: Array<SkillSet> = [
     {label: "Programming Languages and Frameworks", skills: ["Julia", "TypeScript", "JavaScript", "React", "Next.js", "Node.js", "Express", "Python",
-    "Racket", "Sass", "Jupyter", "FFmpeg"]},
+    "Racket", "Sass", "Jupyter", "FFmpeg", "TensorFlow"]},
     {label: "Graphical Skills", skills: ["Adobe Photoshop", "Adobe InDesign", "Adobe Illustrator", "Canva"]},
     {label: "Other Technical Skills", skills: ["DigitalOcean", "Git", "MongoDB"]}
   ]
