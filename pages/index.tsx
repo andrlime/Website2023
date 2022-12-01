@@ -69,7 +69,7 @@ const Paragraph: FunctionComponent<{ title: string, id: string, description: str
 const ContactBar: FunctionComponent = () => (<div style={{marginBottom: "1rem", display: "flex", flexDirection: "row", justifyContent: "space-around"}}>
 <a href="https://github.com/andrlime"><img src="/github.svg" alt="github" style={{margin: "0.2rem"}} width={30}/></a>
 <a href="mailto:anli@u.northwestern.edu"><img src="/mail.svg" alt="email" style={{margin: "0.2rem"}} width={30}/></a>
-<a href="https://www.linkedin.com/in/andrew-li-41778a223/"><img src="/linkedin.svg" alt="linkedin" style={{margin: "0.2rem"}} width={30}/></a>
+<a href="https://www.linkedin.com/in/andrewli2048"><img src="/linkedin.svg" alt="linkedin" style={{margin: "0.2rem"}} width={30}/></a>
 </div>)
 
 const Home: NextPage = () => {
