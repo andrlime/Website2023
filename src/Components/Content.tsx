@@ -45,7 +45,9 @@ const Content: FC = () => {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    axios.get("http://159.223.136.203:20012/projects").then((res) => {
+    
+axios.get("https://orca-app-4rvgg.ondigitalocean.app/website2023-srv/projects").then((res) 
+=> {
       setProjects(res.data);
       console.log(res.data);
       setLoaded(true);
