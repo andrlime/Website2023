@@ -1,32 +1,54 @@
 {
-  "name": "website23",
-  "version": "0.0.1",
-  "description": "Website for 2023",
-  "main": "index.js",
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start -p $PORT",
-    "lint": "next lint"
-  },
-  "repository": "https://github.com/andrlime/Website2023.git",
-  "author": "Andrew Li <54134293+andrewleaf22@users.noreply.github.com>",
-  "license": "MIT",
-  "private": false,
+  "name": "website",
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
-    "airtable": "^0.11.5",
-    "axios": "^1.2.0",
-    "fs": "^0.0.1-security",
-    "next": "^13.0.4",
+    "axios": "^1.2.4",
+    "chart.js": "^4.2.0",
+    "firebase": "^9.16.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-chartjs-2": "^5.2.0",
+    "react-dom": "^18.2.0",
+    "react-router": "^6.7.0",
+    "react-scripts": "5.0.1",
+    "web-vitals": "^2.1.0"
   },
   "devDependencies": {
-    "@types/node": "^18.11.9",
-    "@types/react": "^18.0.25",
-    "dotenv": "^16.0.3",
-    "eslint": "8.28.0",
-    "eslint-config-next": "13.0.5",
-    "typescript": "^4.9.3"
+    "@types/jest": "^27.0.1",
+    "@types/node": "^16.7.13",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.49.0",
+    "@typescript-eslint/parser": "^5.49.0",
+    "autoprefixer": "^10.4.13",
+    "eslint": "^8.32.0",
+    "eslint-config-next": "13.1.5",
+    "postcss": "^8.4.21",
+    "tailwindcss": "^3.2.4",
+    "typescript": "^4.9.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
