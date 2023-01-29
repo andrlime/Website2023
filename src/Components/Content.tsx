@@ -1,9 +1,56 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import PortfolioCard from './PortfolioCard';
 import Skills from './Skills';
+import axios from 'axios';
+
+type Project = {
+  title: string;
+  content: string;
+  link?: string;
+  Attachments: Array<Attachment>,
+  mainLanguage: string
+}
+
+type Attachment = {
+  filename: string;
+  height: number;
+  id: string;
+  size: number;
+  thumbnails: {
+    full: {
+      url: string;
+      width: number;
+      height: number;
+    };
+    large: {
+      url: string;
+      width: number;
+      height: number;
+    };
+    small: {
+      url: string;
+      width: number;
+      height: number;
+    };
+  };
+  type: string;
+  url: string;
+  width: number;
+};
 
 const Content: FC = () => {
   const HEADING_STYLE = "text-xl font-black text-[#414141]";
+
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    axios.get("http://159.223.136.203:20012/projects").then((res) => {
+      setProjects(res.data);
+      console.log(res.data);
+      setLoaded(true);
+    })
+  },[]);
 
   return (
     <div className="p-4 bg-white flex flex-col md:w-3/4 float-right z-30 m-8">
@@ -20,10 +67,9 @@ const Content: FC = () => {
       <Skills/>
 
       <div id="portfolio" className={HEADING_STYLE}>Portfolio</div>
-      <PortfolioCard title={"text"} description={"test test test"} link={"https://www.google.com"} image={"https://v5.airtableusercontent.com/v1/14/14/1674986400000/rUAtluZg8xxrd2XA961njg/M9j_s4wIYeoax91j78oCzNRQfcWzU6kH7tDqt2wr_bF-sOSkAhvPXQWeoH8lhe4VH4gdJmjdlXAgsWJr3N4EPQ/C3Mo3nJcLdbPWJRa1A7nJg6F2JXEXZzdC4u_5WHUFfc"} index={1}/>
-      <PortfolioCard title={"text"} description={"test test test"} link={"https://www.google.com"} image={"https://v5.airtableusercontent.com/v1/14/14/1674986400000/rUAtluZg8xxrd2XA961njg/M9j_s4wIYeoax91j78oCzNRQfcWzU6kH7tDqt2wr_bF-sOSkAhvPXQWeoH8lhe4VH4gdJmjdlXAgsWJr3N4EPQ/C3Mo3nJcLdbPWJRa1A7nJg6F2JXEXZzdC4u_5WHUFfc"} index={2}/>
-      <PortfolioCard title={"text"} description={"test test test"} link={"https://www.google.com"} image={"https://v5.airtableusercontent.com/v1/14/14/1674986400000/rUAtluZg8xxrd2XA961njg/M9j_s4wIYeoax91j78oCzNRQfcWzU6kH7tDqt2wr_bF-sOSkAhvPXQWeoH8lhe4VH4gdJmjdlXAgsWJr3N4EPQ/C3Mo3nJcLdbPWJRa1A7nJg6F2JXEXZzdC4u_5WHUFfc"} index={3}/>
-
+      {!loaded ? <div>Loading...</div> : projects.map((e,i) => (
+        <PortfolioCard languages={e.mainLanguage} key={i+e.title} title={e.title} description={e.content} link={e.link || ""} image={e.Attachments[0].url} index={i+1}/>
+      ))}
     </div>
   );
 };

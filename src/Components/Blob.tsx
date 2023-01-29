@@ -31,10 +31,10 @@ const Blob: FC<{heading: string, x: number, y: number, h: number, source: any, v
   });
 
   return (
-    <div className="absolute flex justify-center items-center cursor-pointer" style={{left: `${cx-width/2}px`, top: `${cy-width/2}px`}}>
+    <a href={heading === "Portfolio" ? "/#portfolio" : "/"}><div className="absolute flex justify-center items-center cursor-pointer" style={{left: `${cx-width/2}px`, top: `${cy-width/2}px`}}>
       <img src={source} alt="Blob" width={width} style={{opacity: "100%"}}/>
       <h1 className={`absolute p-4 font-black text-white text-3xl whitespace-nowrap`}>{heading}</h1>
-    </div>
+    </div></a>
   );
 };
 
