@@ -11,6 +11,7 @@ type Project = {
 }
 
 const router = express.Router();
+
 router.route("/projects").get((req: Request, res: Response) => {
   Airtable.configure({
     endpointUrl: 'https://api.airtable.com',
@@ -30,7 +31,12 @@ router.route("/projects").get((req: Request, res: Response) => {
   }, function done() {
       res.status(200).json(arr);
   });
-})
+});
+
+router.route("/nuft/fakedata").get((req: Request, res: Response) => {
+    const FAKE_DATA = [93,94,97,92,100,99,97,89,95,96];
+    res.status(200).json(FAKE_DATA);
+});
 
 module.exports = router;
 export default router;
