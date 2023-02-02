@@ -36,14 +36,14 @@ router.route("/projects").get((req: Request, res: Response) => {
 router.route("/nuft/fakedata").get((req: Request, res: Response) => {
     const FAKE_DATA: number[] = [];
 
-    for(let i = 0; i < 4; i ++) {
+    for(let i = 0; i < 12; i ++) {
         FAKE_DATA.push(92 + (Math.random()*4)-2);
     }
 
-    FAKE_DATA.push(98);
+    FAKE_DATA.push(100);
     FAKE_DATA.push(99);
 
-    for(let i = 0; i < 4; i ++) {
+    for(let i = 0; i < 12; i ++) {
         FAKE_DATA.push(92 + (Math.random()*4)-2);
     }
 
