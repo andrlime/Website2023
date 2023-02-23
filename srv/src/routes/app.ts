@@ -34,17 +34,10 @@ router.route("/projects").get((req: Request, res: Response) => {
 });
 
 router.route("/nuft/fakedata").get((req: Request, res: Response) => {
-    const FAKE_DATA: number[] = [];
+    const FAKE_DATA: Array<{'timestamp': number, 'cpu_percent': number}> = [];
 
-    for(let i = 0; i < 12; i ++) {
-        FAKE_DATA.push(92 + (Math.random()*4)-2);
-    }
-
-    FAKE_DATA.push(100);
-    FAKE_DATA.push(99);
-
-    for(let i = 0; i < 12; i ++) {
-        FAKE_DATA.push(92 + (Math.random()*4)-2);
+    for(let i = 0; i < 24; i ++) {
+        FAKE_DATA.push({'timestamp': 1677123854 + (Math.random() * 1000 - 500), 'cpu_percent': 5 + (Math.random()*8)-4});
     }
 
     res.status(200).json(FAKE_DATA);
