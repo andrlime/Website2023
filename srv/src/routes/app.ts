@@ -33,6 +33,27 @@ router.route("/projects").get((req: Request, res: Response) => {
   });
 });
 
+router.route("/gd").get((req: Request, res: Response) => {
+    Airtable.configure({
+      endpointUrl: 'https://api.airtable.com',
+      apiKey: process.env.API_KEY
+    });
+    const base = Airtable.base(process.env.BASE_KEY || "");
+    const arr: Array<Project> = [];
+  
+    base('gd').select({
+        maxRecords: 100,
+        view: "Grid view"
+    }).eachPage(function page(records: any, fetchNextPage: any) {
+        records.forEach(function (record: any) {
+            arr.push(record.fields);
+        });
+        fetchNextPage();
+    }, function done() {
+        res.status(200).json(arr);
+    });
+  });
+
 router.route("/nuft/fakedata").get((req: Request, res: Response) => {
     const FAKE_DATA: Array<{'timestamp': number, 'cpu_percent': number}> = [];
 
