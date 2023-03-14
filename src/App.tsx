@@ -1,26 +1,24 @@
-import { FC } from 'react';
+import { MantineProvider } from '@mantine/core';
+import React from 'react';
+import Footer from './Components/Footer';
 import Header from './Components/Header';
-import Blob from './Components/Blob';
-import Options from './Components/Options';
-import Content from './Components/Content';
+import HeadingPhoto from './Components/HeadingPhoto';
+import { Section } from './Components/Section';
+import { HEADER_ITEMS } from './Components/Header';
 
-import BlobSource from './Blob2.svg';
-import BlobSource2 from './Blob3.svg';
-import BlobSource3 from './Blob1.svg';
-
-const App: FC = () => {
+export const App: React.FC = () => {
   return (
-    <div>
-      <div className="bg-white h-[100vh] flex p-3 flex-col align-middle justify-center">
-        <Blob heading={""} source={BlobSource2} x={900} y={230} h={450} v={0}/>
-        <Blob heading={""} source={BlobSource3} x={700} y={650} h={350} v={0}/>
-        <Blob heading={"Portfolio"} source={BlobSource} x={150} y={150} h={250} v={2.3}/>
-        <Header/>
-        <Options/>
-      </div>
-      <Content/>
-    </div>
+    <MantineProvider withGlobalStyles withNormalizeCSS>
+      <Header/>
+      <HeadingPhoto/>
+      {HEADER_ITEMS.map((e,index) => (
+        <Section alignLeft={index % 2 === 0} name={e.label} id={e.to}>
+          <e.component index={index} endpoint={e.endpoint}/>
+        </Section>
+      ))}
+      <Footer/>
+    </MantineProvider>
   );
-};
+}
 
 export default App;

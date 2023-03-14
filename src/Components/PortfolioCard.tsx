@@ -1,23 +1,60 @@
 import { FC } from "react";
+import {
+    Card,
+    Text,
+    Group,
+    Badge
+  } from '@mantine/core';
 
-export const PortfolioCard: FC<{title: string, description: string, link: string, image: string, index: number, languages: string}> = ({title, description, link, image, index, languages}) => {
+interface ProjectProps {
+    title: string;
+    description: string;
+    image: string;
+    year: string;
+    languages: string[];
+    link: string;
+}
+
+export const PortfolioCard: FC<ProjectProps> = ({title, description, image, year, languages, link}) => {
     return (
-        <div className={`border-2 border-[#A2A2A2] rounded-2xl p-5 flex flex-col ${index%2===0 ? "md:flex-row-reverse" : "md:flex-row"} overflow-scroll my-2`}>
-            
-            <div className="w-[100%] md:w-2/4" style={{backgroundImage: `url(${image})`, height: "200px", backgroundRepeat: "no-repeat", backgroundSize: "cover"}}></div>
-            
-            <div className={`md:mx-4 md:my-0 my-4 mx-0 flex flex-col ${index%2===0 ? "text-right" : "text-left"}`} style={{justifyContent: "space-between"}}>
-                <div>
-                    <div className="font-black text-xl text-[#414141]">{title}</div>
-                    <div>{description}</div>
-                    <div className={`flex flex-row ${index%2===0 ? "float-right" : "float-left"}`}>{languages.split(", ").map((element: string, index: number) => (
-                        <img style={{padding: "0.1rem"}} alt={element} key={index} src={`https://img.shields.io/static/v1?label=&message=${element.charAt(0).toUpperCase() + element.slice(1)}&style=flat&logo=${element}&labelColor=cbcbcb`}/>
-                    ))}</div>
-                </div>
-                
-                <a href={link}><button className="bg-gray-500 hover:bg-gray-900 transition-all ease-in-out text-white font-black px-4 p-2 rounded-md">More Info</button></a>
-            </div>
-        </div>
+        <Card style={{zIndex: 1, minWidth: "200px", height: "fit-content"}} withBorder radius="md" p="md" className="bg-white w-full md:w-[24%] m-1">
+            <Card.Section>
+                <div style={{backgroundImage: `url(${image})`, backgroundPosition: "top center", height: "200px", backgroundSize: "cover"}}></div>
+            </Card.Section>
+
+            <Card.Section style={{borderBottom: "0.1rem solid #E1E1E1", padding: "1rem", paddingTop: "0.2rem"}} mt="md">
+                <Badge size="md" color={"grape"}>{year}</Badge>
+                <Group position="apart" noWrap>
+                    <Text fz="lg" fw={500}>
+                        {title}
+                    </Text>
+                </Group>
+                <Text fz="sm" mt="xs" align="left">
+                    {description}
+                </Text>
+            </Card.Section>
+
+            <Card.Section style={{padding: "1rem", paddingTop: "0rem"}} mt="md">
+                <Group position="apart">
+                <Text fz="lg" fw={500}>
+                    Languages
+                </Text>
+                </Group>
+                <Group spacing={7} mt={5}>
+                    {languages.map((e) => (
+                        <Badge size="md" color={"grape"} key={e}>{e}</Badge>
+                    ))}
+                </Group>
+            </Card.Section>
+
+            <Card.Section style={{borderTop: "0.1rem solid #E1E1E1", padding: "1rem", paddingTop: "0rem"}} >
+
+                <Group mt="xs">
+                    <a href={link} style={{backgroundColor: "#4E2A84", flex: 1}} className="p-2 rounded-xl text-white text-center font-bold">Show details</a>
+                </Group>
+
+            </Card.Section>
+        </Card>
     );
 };
 
