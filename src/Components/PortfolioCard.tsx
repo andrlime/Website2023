@@ -23,7 +23,7 @@ export const PortfolioCard: FC<ProjectProps> = ({title, description, image, year
             </div>
 
             <div style={{borderBottom: "0.1rem solid #E1E1E1", padding: "1rem 1rem 1rem 1rem", flexGrow: 2}}>
-                <Group position="apart">
+                <Group position="apart" style={{gap: "0rem"}}>
                     <Text fz="lg" fw={500} style={{textAlign: "left"}}>
                         {title}
                     </Text>
