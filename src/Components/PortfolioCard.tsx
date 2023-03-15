@@ -17,24 +17,24 @@ interface ProjectProps {
 
 export const PortfolioCard: FC<ProjectProps> = ({title, description, image, year, languages, link}) => {
     return (
-        <Card style={{zIndex: 1, minWidth: "200px", height: "fit-content"}} withBorder radius="md" p="md" className="bg-white w-full md:w-[24%] m-1">
-            <Card.Section>
-                <div style={{backgroundImage: `url(${image})`, backgroundPosition: "top center", height: "200px", backgroundSize: "cover"}}></div>
-            </Card.Section>
+        <Card style={{zIndex: 1, minWidth: "200px"}} withBorder radius="md" p="md" className="bg-white w-full md:w-[32%] m-1 flex flex-col p-0">
+            <div>
+                <div style={{backgroundImage: `url(${image})`, backgroundPosition: "top center", height: "300px", backgroundSize: "cover"}}></div>
+            </div>
 
-            <Card.Section style={{borderBottom: "0.1rem solid #E1E1E1", padding: "1rem", paddingTop: "0.2rem"}} mt="md">
-                <Badge size="md" color={"grape"}>{year}</Badge>
-                <Group position="apart" noWrap>
-                    <Text fz="lg" fw={500}>
+            <div style={{borderBottom: "0.1rem solid #E1E1E1", padding: "1rem 1rem 1rem 1rem", flexGrow: 2}}>
+                <Group position="apart">
+                    <Text fz="lg" fw={500} style={{textAlign: "left"}}>
                         {title}
                     </Text>
+                    <Badge size="md" color={"grape"}>{year}</Badge>
                 </Group>
                 <Text fz="sm" mt="xs" align="left">
                     {description}
                 </Text>
-            </Card.Section>
+            </div>
 
-            <Card.Section style={{padding: "1rem", paddingTop: "0rem"}} mt="md">
+            <div style={{padding: "1rem"}}>
                 <Group position="apart">
                 <Text fz="lg" fw={500}>
                     Languages
@@ -45,15 +45,15 @@ export const PortfolioCard: FC<ProjectProps> = ({title, description, image, year
                         <Badge size="md" color={"grape"} key={e}>{e}</Badge>
                     ))}
                 </Group>
-            </Card.Section>
+            </div>
 
-            <Card.Section style={{borderTop: "0.1rem solid #E1E1E1", padding: "1rem", paddingTop: "0rem"}} >
+            <div style={{borderTop: "0.1rem solid #E1E1E1", padding: "1rem", display: "flex", alignItems: "end"}} >
 
-                <Group mt="xs">
+                <Group mt="xs" style={{width: "100%"}}>
                     <a href={link} style={{backgroundColor: "#4E2A84", flex: 1}} className="p-2 rounded-xl text-white text-center font-bold">Show details</a>
                 </Group>
 
-            </Card.Section>
+            </div>
         </Card>
     );
 };

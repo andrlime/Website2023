@@ -53,9 +53,9 @@ const Header: FC = () => {
       <div id="h-logo" className={`w-fit text-2xl transition-all ease-in-out cursor-default select-none font-black whitespace-nowrap ${PURPLE_COLOR} transition-all ease-in-out hover:cursor-pointer hover:text-white`}>
         Andrew Li
       </div>
-      <div style={{color: COLORS[1]}} id="h-nav" className="hidden md:flex flex-col md:flex-row w-full max-w-[600px] justify-between text-md font-black">
+      <div id="h-nav" className="hidden md:flex flex-col md:flex-row w-full max-w-[600px] justify-between text-md font-black transition-all">
         {HEADER_ITEMS.map((e,i) => (
-          <a href={`#${e.to}`}><div className="whitespace-nowrap uppercase">{e.label}</div></a>
+          <a style={{color: COLORS[1]}} href={`#${e.to}`}><div className={`whitespace-nowrap uppercase hover:text-[#B6ACD1] transition-all`}>{e.label}</div></a>
         ))}
       </div>
     </div>
