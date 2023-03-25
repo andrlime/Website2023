@@ -34,7 +34,7 @@ export const Section: React.FC<{alignLeft?: boolean, children: ReactNode, name?:
   };
 
   return (
-    <div id={id}><div className='p-12 grid grid-cols-7 w-full'>
+    <div id={id}><div className='p-12 grid md:grid-cols-7 w-full'>
         <GenericGridRow numberOfCols={7} floatLeft={alignLeft} buffer={1} span={3}>
             <div className={`text-4xl md:text-6xl font-black ${alignLeft ? "text-left" : "text-right"} mb-2`}>{name}</div>
         </GenericGridRow>

@@ -7,6 +7,7 @@ export const HEADER_ITEMS = [
   {label: "About", to: "about", component: AboutContent, endpoint: ""},
   {label: "Coding Projects", to: "code", component: Content, endpoint: "https://orca-app-4rvgg.ondigitalocean.app/api/projects"},
   {label: "Graphic Design", to: "gd", component: Content, endpoint: "https://orca-app-4rvgg.ondigitalocean.app/api/gd"},
+  {label: "Gizmos", to: "gizmos", component: Content, endpoint: "https://orca-app-4rvgg.ondigitalocean.app/api/gizmos"},
 ];
 
 const Header: FC = () => {

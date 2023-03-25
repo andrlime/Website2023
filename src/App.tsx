@@ -11,11 +11,12 @@ export const App: React.FC = () => {
     <MantineProvider withGlobalStyles withNormalizeCSS>
       <Header/>
       <HeadingPhoto/>
-      {HEADER_ITEMS.map((e,index) => (
+
+        {HEADER_ITEMS.map((e,index) => (
         <Section alignLeft={index % 2 === 0} name={e.label} id={e.to}>
           <e.component index={index} endpoint={e.endpoint}/>
         </Section>
-      ))}
+        ))}
       <Footer/>
     </MantineProvider>
   );
