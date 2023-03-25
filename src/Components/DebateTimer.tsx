@@ -9,6 +9,8 @@ interface TimerProps {
 }
 
 const parseSeconds = (seconds: number): string => {
+    if(seconds < 0) return "00:00";
+
     const SECONDS = seconds%60;
     const MINUTES = ((seconds-SECONDS)/60) % 60;
     const HOURS = Math.floor(seconds/3600);
@@ -36,10 +38,10 @@ const Timer: React.FC<TimerProps> = ({time, started, callback}) => {
     });
 
     return (
-        <div className="px-6 py-4 m-2 border-white border-2 flex flex-col justify-center align-middle w-fit hover:cursor-pointer rounded-3xl bg-white">
+        <div className="px-6 py-4 m-2 flex flex-col justify-center align-middle w-fit hover:cursor-pointer rounded-3xl bg-white transition-all ease-out">
             <span onClick={() => {
                 callback(time);
-            }} className="font-black text-9xl">{timeString}</span>
+            }} className={`font-black text-9xl ${time < 0 ? "animate-flash" : ""}`}>{timeString}</span>
             <div className="flex flex-row justify-around">
                 <span onClick={() => {
                     if(started) callback(69000);
@@ -77,9 +79,9 @@ const SmallTimer: React.FC<SmallTimerProps> = ({time, label, started, callback})
     });
 
     return (
-        <div className="grow px-4 py-3 m-2 border-white border-2 flex flex-col justify-center align-middle w-fit hover:cursor-pointer rounded-3xl bg-white" onClick={() => callback(time)}>
+        <div className="grow px-4 py-3 m-2 flex flex-col justify-center align-middle w-fit hover:cursor-pointer rounded-3xl bg-white transition-all ease-out" onClick={() => callback(time)}>
             <span className="font-bold text-md">{label}</span>
-            <span className="font-black text-4xl">{timeString}</span>
+            <span className={`font-black text-4xl ${time < 0 ? "animate-flash" : ""}`}>{timeString}</span>
         </div>
     );
 }
