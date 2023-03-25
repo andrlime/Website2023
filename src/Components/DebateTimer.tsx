@@ -40,7 +40,8 @@ const Timer: React.FC<TimerProps> = ({time, started, callback}) => {
     return (
         <div className="px-6 py-4 m-2 flex flex-col justify-center align-middle w-fit hover:cursor-pointer rounded-2xl bg-white transition-all ease-out">
             <span onClick={() => {
-                callback(time);
+                if(started) callback(-9000000000);
+                else callback(time);
             }} className={`font-black text-9xl ${time < 0 ? "animate-flash" : ""}`}>{timeString}</span>
             <div className="flex flex-row justify-around">
                 <span onClick={() => {
@@ -79,7 +80,10 @@ const SmallTimer: React.FC<SmallTimerProps> = ({time, label, started, callback})
     });
 
     return (
-        <div className="grow px-4 py-3 m-2 flex flex-col justify-center align-middle w-fit hover:cursor-pointer rounded-2xl bg-white transition-all ease-out" onClick={() => callback(time)}>
+        <div className="grow px-4 py-3 m-2 flex flex-col justify-center align-middle w-fit hover:cursor-pointer rounded-2xl bg-white transition-all ease-out" onClick={() => {
+            if(started) callback(-9000000000);
+            else callback(time);
+        }}>
             <span className="font-bold text-md">{label}</span>
             <span className={`font-black text-4xl ${time < 0 ? "animate-flash" : ""}`}>{timeString}</span>
         </div>
@@ -127,12 +131,18 @@ export const DebateTimer: React.FC = () => {
                     {/* Show prep timers if enabled */}
                     <div className="flex sm:flex-col" style={{display: showPrep ? "flex" : "none"}}>
                         <SmallTimer time={prepTimeA} started={prepTimeAOn} label={"Team A Prep"} callback={(time: number) => {
-                            setPrepTimeA(time);
-                            setPrepTimeAOn(true);    
+                            if(time === -9000000000) setPrepTimeAOn(false);
+                            else {
+                                setPrepTimeA(time);
+                                setPrepTimeAOn(true);
+                            }
                         }}/>
                         <SmallTimer time={prepTimeB} started={prepTimeBOn} label={"Team B Prep"} callback={(time: number) => {
-                            setPrepTimeB(time);
-                            setPrepTimeBOn(true);
+                            if(time === -9000000000) setPrepTimeBOn(false);
+                            else {
+                                setPrepTimeB(time);
+                                setPrepTimeBOn(true);
+                            }
                         }}/>
                     </div>
                 </div>
