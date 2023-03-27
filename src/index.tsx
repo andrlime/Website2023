@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import DebateTimer from './Components/DebateTimer';
 import Error404 from './Components/Error404';
+import { VoltorbFlip } from './Components/Experiments/VoltorbFlip';
 
 const router = createBrowserRouter([
   {
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
   {
     path: "/timer",
     element: <DebateTimer/>,
+  },
+  {
+    path: "/voltorb",
+    element: <VoltorbFlip/>,
   },
   {
     path: "*",
