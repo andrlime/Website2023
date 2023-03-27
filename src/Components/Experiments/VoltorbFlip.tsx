@@ -172,7 +172,7 @@ export const VoltorbFlip: React.FC = () => {
             }
 
             let board = levels.filter(a => a[0] === level + (coins === 0 ? -1 : 1) || 1);
-            setLevel(level + (coins === 0 ? -1 : 1));
+            setLevel(level + (coins === 0 ? (level > 1 ? -1 : 0) : 1));
             let newLevel = board[Math.round(Math.random()*board.length)];
             setGameboard(reset(newLevel[1], newLevel[2], newLevel[3]));
 
