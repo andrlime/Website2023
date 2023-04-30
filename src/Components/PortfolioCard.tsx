@@ -19,7 +19,7 @@ export const PortfolioCard: FC<ProjectProps> = ({title, description, image, year
     return (
         <Card style={{zIndex: 1, minWidth: "200px"}} withBorder radius="md" p="md" className="bg-white w-full md:w-[32%] m-1 flex flex-col p-0">
             <div>
-                <div style={{backgroundImage: `url(${image})`, backgroundPosition: "top center", height: "300px", backgroundSize: "cover"}}></div>
+                <div style={{backgroundImage: `url(${image})`, backgroundPosition: "top center", height: "300px", backgroundSize: "contain", backgroundRepeat: "no-repeat", backgroundPositionY: "center", backgroundColor: "#EEE"}}></div>
             </div>
 
             <div style={{borderBottom: "0.1rem solid #E1E1E1", padding: "1rem 1rem 1rem 1rem", flexGrow: 2}}>
